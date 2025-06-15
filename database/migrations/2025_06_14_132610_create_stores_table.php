@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visits', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('visit');
-            $table->string('id_name');
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('cedula');
-            $table->string('mail');
+            $table->string('group');
+            $table->string('textbox9');
+            $table->string('exam_code');
+            $table->string('exam');
+            $table->string('exam_amount');
+            $table->string('total_exam');
             $table->string('sede');
-            $table->date('date_start')->nullable();
-            $table->date('date_end')->nullable();
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visits');
+        Schema::dropIfExists('stores');
     }
 };

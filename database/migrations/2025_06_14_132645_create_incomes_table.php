@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visits', function (Blueprint $table) {
+        Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->string('visit');
-            $table->string('id_name');
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('cedula');
-            $table->string('mail');
+            $table->string('group');
+            $table->string('cost');
+            $table->string('idcode');
+            $table->string('descrip');
+            $table->string('cost1');
             $table->string('sede');
-            $table->date('date_start')->nullable();
-            $table->date('date_end')->nullable();
+            $table->string('convenio');
+            $table->string('cost2');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visits');
+        Schema::dropIfExists('incomes');
     }
 };

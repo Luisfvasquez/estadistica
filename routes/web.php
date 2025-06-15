@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\VisitController;
+use App\Http\Controllers\AnalyteController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -18,8 +18,14 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+
+    Route::get('analyte/carali', [AnalyteController::class, 'carali'])->name('analyte.carali');
+    Route::get('analyte/leones', [AnalyteController::class, 'leones'])->name('analyte.leones');
+    Route::get('analyte/hospital', [AnalyteController::class, 'hospital'])->name('analyte.hospital');
+    Route::get('analyte/salle', [AnalyteController::class, 'salle'])->name('analyte.salle');
+    
+    Route::post('analyte/import', [AnalyteController::class, 'store'])->name('analyte.import');
 });
 
-Route::get('grafico', [VisitController::class, 'index'])->name('grafico');
 
 require __DIR__.'/auth.php';
