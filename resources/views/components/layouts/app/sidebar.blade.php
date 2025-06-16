@@ -42,24 +42,24 @@
         </div>  
         <div x-data="{ open: false }">
             <flux:navlist.item icon="users" @click="open = !open" class="cursor-pointer">
-                {{ __('Facturas') }}
+                {{ __('Ingresos') }}
             </flux:navlist.item>
             
             <div x-show="open" class="pl-4">
-                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
-                    {{ __('Carali Factura') }}
+                <flux:navlist.item :href="route('facture.carali')" :current="request()->routeIs('facture.carali')" wire:navigate>
+                    {{ __('Carali Ingresos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
-                    {{ __('Leones Factura') }}
+                <flux:navlist.item :href="route('facture.leones')" :current="request()->routeIs('facture.leones')" wire:navigate>
+                    {{ __('Leones Ingresos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
-                    {{ __('Hospital Factura') }}
+                <flux:navlist.item :href="route('facture.hospital')" :current="request()->routeIs('facture.hospital')" wire:navigate>
+                    {{ __('Hospital Ingresos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
-                    {{ __('Salle Factura') }}
+                <flux:navlist.item :href="route('facture.salle')" :current="request()->routeIs('facture.salle')" wire:navigate>
+                    {{ __('Salle Ingresos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.yaritagua')" :current="request()->routeIs('analyte.yaritagua')" wire:navigate>
-                    {{ __('Yaritagua Factura') }}
+                <flux:navlist.item :href="route('facture.yaritagua')" :current="request()->routeIs('facture.yaritagua')" wire:navigate>
+                    {{ __('Yaritagua Ingresos') }}
                 </flux:navlist.item>
             </div>
         </div>  

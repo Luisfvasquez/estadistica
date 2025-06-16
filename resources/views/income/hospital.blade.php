@@ -1,4 +1,4 @@
-<x-layouts.app :title="__('Analitos Carali')">
+<x-layouts.app :title="__('Ingresos Carali')">
 
     <div class="flex w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -35,7 +35,7 @@
         </div>
         <div class="relative flex-1 p-1 overflow-hidden rounded-xl border border-neutral-900 dark:border-neutral-700">
             <p class="mb-2">Filtrar por fecha:</p>
-            <form action="{{ route('analyte.salle') }}" method="get" class="px-1 py-1">
+            <form action="{{ route('analyte.hospital') }}" method="get" class="px-1 py-1">
                 @csrf
                 <div class="flex items-end gap-x-2 flex-wrap sm:flex-nowrap">
                     <div>
@@ -160,7 +160,6 @@
         }
     }
 </script>
-
 
 <script>
     document.addEventListener("livewire:navigated", function() {

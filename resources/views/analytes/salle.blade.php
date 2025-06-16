@@ -94,10 +94,10 @@
                                                 <table class="min-w-full text-xs text-left">
                                                     <thead>
                                                         <tr>
-                                                            <th class="px-6 py-2">TipExa1</th>
+                                                            <th class="px-6 py-2"></th>
                                                             <th class="px-6 py-2">Código</th>
                                                             <th class="px-6 py-2">Descripción</th>
-                                                            <th class="px-6 py-2">TotExa</th>
+                                                            <th class="px-6 py-2">Cantidad</th>
                                                             <th class="px-6 py-2">Sede</th>
                                                             <th class="px-6 py-2">Convenio</th>
                                                         </tr>
@@ -106,7 +106,7 @@
                                                         @foreach ($resultados->where('group', $grupo->group) as $detalle)
                                                             <tr
                                                                 class="border-t border-neutral-700 dark:border-neutral-100 ">
-                                                                <td class="px-6 py-2 ">{{ $detalle->tipexa1 }}</td>
+                                                                <td class="px-6 py-2 "></td>
                                                                 <td class="px-6 py-2">{{ $detalle->idcodigo }}</td>
                                                                 <td class="px-6 py-2">{{ $detalle->descrip }}</td>
                                                                 <td class="px-6 py-2">{{ $detalle->totexa }}</td>
