@@ -16,7 +16,6 @@
         <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
             {{ __('Dashboard') }}
         </flux:navlist.item>
-        <i class="fa-regular fa-file"></i>
         <!-- Menú desplegable con Alpine.js -->
         <div x-data="{ open: false }">
             <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
@@ -41,9 +40,237 @@
                 </flux:navlist.item> --}}
             </div>
         </div>  
-        <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-            {{ __('Dashboard') }}
-        </flux:navlist.item>
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="users" @click="open = !open" class="cursor-pointer">
+                {{ __('Visitas') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    {{ __('dashboard') }}
+                </flux:navlist.item> --}}
+            </div>
+        </div>  
+       
 
     </flux:navlist.group>                
 </flux:navlist>
@@ -53,17 +280,6 @@
 
 
             <flux:spacer />
-
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="#" target="_blank">
-                {{ __('option 1') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="#" target="_blank">
-                {{ __('option 2') }}
-                </flux:navlist.item>
-            </flux:navlist>
-
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
                 <flux:profile
