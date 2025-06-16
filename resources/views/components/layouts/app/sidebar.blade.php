@@ -19,7 +19,7 @@
         <!-- Menú desplegable con Alpine.js -->
         <div x-data="{ open: false }">
             <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
-                {{ __('Analytes') }}
+                {{ __('Analitos') }}
             </flux:navlist.item>
             
             <div x-show="open" class="pl-4">
@@ -35,14 +35,37 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                 <flux:navlist.item :href="route('analyte.yaritagua')" :current="request()->routeIs('analyte.yaritagua')" wire:navigate>
+                    {{ __('Yaritagua Analitos') }}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
             <flux:navlist.item icon="users" @click="open = !open" class="cursor-pointer">
-                {{ __('Visitas') }}
+                {{ __('Facturas') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Factura') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
+                    {{ __('Leones Factura') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Factura') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Factura') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.yaritagua')" :current="request()->routeIs('analyte.yaritagua')" wire:navigate>
+                    {{ __('Yaritagua Factura') }}
+                </flux:navlist.item>
+            </div>
+        </div>  
+       {{--  <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analytes') }}
             </flux:navlist.item>
             
             <div x-show="open" class="pl-4">
@@ -58,9 +81,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -81,9 +104,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -104,9 +127,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -127,9 +150,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -150,9 +173,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -173,9 +196,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -196,9 +219,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -219,9 +242,9 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> 
             </div>
         </div>  
         <div x-data="{ open: false }">
@@ -242,34 +265,11 @@
                 <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
                     {{ __('Salle Analitos') }}
                 </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('dashboard') }}
-                </flux:navlist.item> --}}
+                </flux:navlist.item> -
             </div>
-        </div>  
-        <div x-data="{ open: false }">
-            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
-                {{ __('Analytes') }}
-            </flux:navlist.item>
-            
-            <div x-show="open" class="pl-4">
-                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
-                    {{ __('Carali Analitos') }}
-                </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
-                    {{ __('Leones Analitos') }}
-                </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
-                    {{ __('Hospital Analitos') }}
-                </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
-                    {{ __('Salle Analitos') }}
-                </flux:navlist.item>
-             {{--    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('dashboard') }}
-                </flux:navlist.item> --}}
-            </div>
-        </div>  
+        </div>  --}}
        
 
     </flux:navlist.group>                

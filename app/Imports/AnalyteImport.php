@@ -13,6 +13,16 @@ class AnalyteImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
+    protected $date_start;
+    protected $date_end;
+    public function __construct($date_start, $date_end)
+    {
+        $this->date_start = $date_start;
+        $this->date_end = $date_end;
+    }
+
+
     public function model(array $row)
     {
         return new Analyte([
@@ -24,6 +34,8 @@ class AnalyteImport implements ToModel, WithHeadingRow
             'sede' => $row['sede'],
             'convenio' => $row['convenio'],
             'totexa2' => $row['totexa2'],
+            'date_start' => $this->date_start,
+            'date_end' => $this->date_end,            
         ]);
     }
 }

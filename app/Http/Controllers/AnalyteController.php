@@ -7,58 +7,82 @@ use App\Models\Analyte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class AnalyteController extends Controller
 {
-     public function carali()
+    private function fetchAnalyteData(Request $request, string $sede)
     {
-        $grupos = Analyte::select('group', DB::raw('COUNT(*) as total'))
+        $query = Analyte::where('sede', $sede);
+        $resultados = $query->get();
+
+        if ($request->filled('date_start')) {
+            $query->where('date_start', '>=', $request->date_start);
+        }
+
+        if ($request->filled('date_end')) {
+            $query->where('date_end', '<=', $request->date_end);
+        }
+
+        $grupos = $query->select('group', DB::raw('COUNT(*) as total'))
             ->groupBy('group')
             ->orderBy('group', 'asc')
-            ->where('sede', 'BRICENO CARALI')
-            ->get(); 
-            $resultados = Analyte::where('sede', 'BRICENO CARALI')->get();
-        return view('analytes.carali', compact('resultados', 'grupos'));
+            ->get();
+
+        $examenes = $query->select('Descrip', DB::raw('COUNT(*) as total'))
+            ->groupBy('Descrip')
+            ->orderBy('Descrip', 'asc')
+            ->get();
+
+
+        return compact('resultados', 'grupos', 'examenes');
     }
 
-     public function leones()
+    public function carali(Request $request)
     {
-        $grupos = Analyte::select('group', DB::raw('COUNT(*) as total'))
-            ->groupBy('group')
-            ->orderBy('group', 'asc')
-            ->where('sede', 'BRICENO CARALI')
-            ->get(); 
-            $resultados = Analyte::where('sede', 'BRICENO CARALI')->get();
-        return view('analytes.leones', compact('resultados', 'grupos'));
+        return view('analytes.carali', $this->fetchAnalyteData($request, 'BRICENO CARALI'));
     }
 
-     public function hospital()
+    public function leones(Request $request)
     {
-        $grupos = Analyte::select('group', DB::raw('COUNT(*) as total'))
-            ->groupBy('group')
-            ->orderBy('group', 'asc')
-            ->where('sede', 'BRICENO CARALI')
-            ->get(); 
-            $resultados = Analyte::where('sede', 'BRICENO CARALI')->get();
-        return view('analytes.hospital', compact('resultados', 'grupos'));
+        return view('analytes.leones', $this->fetchAnalyteData($request, 'BRICENO ESTE'));
     }
 
-     public function salle()
+    public function hospital(Request $request)
     {
-        $grupos = Analyte::select('group', DB::raw('COUNT(*) as total'))
-            ->groupBy('group')
-            ->orderBy('group', 'asc')
-            ->where('sede', 'BRICENO CARALI')
-            ->get(); 
-            $resultados = Analyte::where('sede', 'BRICENO CARALI')->get();
-        return view('analytes.salle', compact('resultados', 'grupos'));
+        return view('analytes.hospital', $this->fetchAnalyteData($request, 'BRICENO Hospital'));
+    }
+
+    public function salle(Request $request)
+    {
+        return view('analytes.salle', $this->fetchAnalyteData($request, 'BRICENO SALLE'));
+    }
+
+    public function yaritagua(Request $request)
+    {
+        return view('analytes.yaritagua', $this->fetchAnalyteData($request, 'BRICENO YARITAGUA'));
     }
 
 
-
-    public function store() {
+    public function store()
+    {
         $file = request()->file('file');
-        Excel::import(new AnalyteImport, $file);
-        return redirect()->back()->with('success', 'Archivo importado correctamente.');
+
+        try {
+            Excel::import(
+                new AnalyteImport(request('date_start'), request('date_end')),
+                $file
+            );
+
+            return redirect()->back()->with('success', 'Archivo importado correctamente.');
+        } catch (ValidationException $e) {
+            $failures = $e->failures();
+
+            // Puedes pasar los errores a la vista
+            return redirect()->back()->withErrors($failures);
+        } catch (\Throwable $e) {
+            // Si hubo otro tipo de error (formato de archivo, error interno, etc.)
+            return redirect()->back()->with('error', 'Error al importar el archivo: ' . $e->getMessage());
+        }
     }
 }
