@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
             $table->string('group');
-            $table->string('cost');
+            $table->decimal('cost', 10, 2);
             $table->string('idcode');
             $table->string('descrip');
-            $table->string('cost1');
+            $table->decimal('cost1', 10, 2);
             $table->string('sede');
             $table->string('convenio');
-            $table->string('cost2');
+            $table->decimal('cost2', 10, 2);
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();

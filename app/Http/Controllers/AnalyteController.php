@@ -14,7 +14,7 @@ class AnalyteController extends Controller
     private function fetchAnalyteData(Request $request, string $sede)
     {
         $query = Analyte::where('sede', $sede);
-        $resultados = $query->get();
+
 
         if ($request->filled('date_start')) {
             $query->where('date_start', '>=', $request->date_start);
@@ -23,11 +23,14 @@ class AnalyteController extends Controller
         if ($request->filled('date_end')) {
             $query->where('date_end', '<=', $request->date_end);
         }
+        $resultados = $query->get();
+        $total = $query->sum('totexa');
 
-        $grupos = $query->select('group', DB::raw('COUNT(*) as total'))
-            ->groupBy('group')
+        $grupos = $query->select('group', DB::raw('SUM(totexa) as total'))
+            ->groupBy('group', 'group')
             ->orderBy('group', 'asc')
             ->get();
+
 
         $examenes = $query->select('Descrip', DB::raw('COUNT(*) as total'))
             ->groupBy('Descrip')
@@ -35,7 +38,7 @@ class AnalyteController extends Controller
             ->get();
 
 
-        return compact('resultados', 'grupos', 'examenes');
+        return compact('resultados', 'grupos', 'examenes', 'total');
     }
 
     public function carali(Request $request)
@@ -64,25 +67,71 @@ class AnalyteController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
-        $file = request()->file('file');
+        $file = $request->file('file');
+       
+        $request->validate([
+            'file' => 'required|file|mimes:xml|max:2048', // Validar que sea un archivo XML
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after_or_equal:date_start',
+        ]);
 
         try {
-            Excel::import(
-                new AnalyteImport(request('date_start'), request('date_end')),
-                $file
+        $xmlString = file_get_contents($file->getRealPath());
+        $xmlString = mb_convert_encoding($xmlString, 'UTF-8', 'auto');
+
+
+            $xml = simplexml_load_string(
+                $xmlString,
+                'SimpleXMLElement',
+                LIBXML_NOCDATA | LIBXML_NOERROR | LIBXML_NOWARNING
             );
 
-            return redirect()->back()->with('success', 'Archivo importado correctamente.');
-        } catch (ValidationException $e) {
-            $failures = $e->failures();
+            if ($xml === false) {
+                return redirect()->back()->with('error', 'No se pudo leer el XML.');
+            }
 
-            // Puedes pasar los errores a la vista
-            return redirect()->back()->withErrors($failures);
-        } catch (\Throwable $e) {
-            // Si hubo otro tipo de error (formato de archivo, error interno, etc.)
-            return redirect()->back()->with('error', 'Error al importar el archivo: ' . $e->getMessage());
+
+            $json = json_encode($xml);
+            $data = json_decode($json, true);
+         
+
+            $totexa2 = $data['table1']['@attributes']['TotExa2'] ?? null;
+            $grupos = $data['table1']['table1_GRUPO_Collection']['table1_GRUPO'] ?? [];
+
+
+            foreach ($grupos as $grupo) {
+                $grupoName = isset($grupo['@attributes']['GRUPO']) ? $grupo['@attributes']['GRUPO'] : null;
+                $totexa1 = $grupo['@attributes']['TotExa1'] ?? null;
+
+                $detalles = $grupo['Detail_Collection']['Detail'] ?? [];
+
+                if (isset($detalles['@attributes'])) {
+                    $detalles = [$detalles];
+                }
+
+                foreach ($detalles as $detalle) {
+                    $attr = $detalle['@attributes'] ?? [];
+
+                    Analyte::create([
+                        'group'     => $grupoName,
+                        'totexa1'   => $totexa1,
+                        'idcodigo'  => $attr['idCodigo'] ?? null,
+                        'descrip'   => $attr['Descrip'] ?? null,
+                        'totexa'    => $attr['TotExa'] ?? null,
+                        'sede'      => $attr['SEDE'] ?? null,
+                        'convenio'  => $attr['CONVENIO'] ?? null,
+                        'totexa2'   => $totexa2,
+                        'date_start' => $request->input('date_start'),
+                        'date_end'  => $request->input('date_end'),
+                    ]);
+                }
+            }
+
+            return redirect()->back()->with('success', 'Datos importados correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
         }
     }
 }

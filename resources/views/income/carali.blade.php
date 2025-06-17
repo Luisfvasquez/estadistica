@@ -20,17 +20,16 @@
                     class="px-1 py-1">
                     @csrf
                     <label for="date_start" class="text-sm">Fecha inicio</label>
-                    <input id="date_start" type="date" name="date_start"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            >
+                    <input id="date_start" type="date" name="date_start" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <label for="date_end" class="text-sm">Fecha fin</label>
-                    <input id="date_end" type="date" name="date_end"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            >
-                    <input type="file" name="file" accept=".xlsx, .xls, .csv" required  class="mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <input id="date_end" type="date" name="date_end" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <input type="file" name="file" accept=".xml,application/xml,text/xml" required
+                        class="mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <button type="submit"
                         class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Importar</button>
-                </form>         
+                </form>
 
             </div>
         </div>
@@ -42,14 +41,12 @@
                     <div>
                         <label for="date_start" class="text-sm">Fecha inicio</label>
                         <input id="date_start" type="date" name="date_start" value="{{ request('date_start') }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            >
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                     <div>
                         <label for="date_end" class="text-sm">Fecha fin</label>
                         <input id="date_end" type="date" name="date_end" value="{{ request('date_end') }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            >
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                     <button type="submit"
                         class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -74,6 +71,9 @@
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Total Exámenes</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-100 uppercase dark:text-neutral-100">
+                                            Total Ingresos: {{ number_format($total, 2, '.', '') }} </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,11 +86,11 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-200 dark:text-neutral-200">
-                                                {{ $grupo->total }}
+                                                {{ number_format($grupo->total, 2, '.', '') }}
                                             </td>
                                         </tr>
                                         <tr id="details-{{ Str::slug($grupo->group, '_') }}" class="hidden">
-                                            <td colspan="2"
+                                            <td colspan="3"
                                                 class="whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200 dark:bg-neutral-900">
                                                 <table class="min-w-full text-xs text-left">
                                                     <thead>
@@ -110,11 +110,14 @@
                                                                 <td class="px-6 py-2 "></td>
                                                                 <td class="px-6 py-2">{{ $detalle->idcode }}</td>
                                                                 <td class="px-6 py-2">{{ $detalle->descrip }}</td>
-                                                                <td class="px-6 py-2">{{ $detalle->costo1 }}</td>
+                                                                <td class="px-6 py-2">
+                                                                    {{ number_format($detalle->cost1, 2, '.', '') }}
+                                                                </td>
                                                                 <td class="px-6 py-2">{{ $detalle->sede }}</td>
                                                                 <td class="px-6 py-2">{{ $detalle->convenio }}</td>
                                                             </tr>
                                                         @endforeach
+
                                                     </tbody>
                                                 </table>
                                             </td>
@@ -165,10 +168,7 @@
 
 <script>
     document.addEventListener("livewire:navigated", function() {
-        setupChartBar('myChartBar', @json($examenes->pluck('Descrip')), @json($examenes->pluck('total')));
-        setupChartPie('myChartPie', @json($grupos->pluck('group')), @json($grupos->pluck('total')));
+        setupChartBar('myChartBar', @json($examenes->pluck('Descrip')), @json($examenes->pluck('total')), 'ingresos');
+        setupChartPie('myChartPie', @json($grupos->pluck('group')), @json($grupos->pluck('total')), 'ingresos');
     });
 </script>
-
-
-

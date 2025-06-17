@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('sede');
             $table->string('convenio');
             $table->string('totexa2');
-            $table->date('date_start')->nullable();
-            $table->date('date_end')->nullable();
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }

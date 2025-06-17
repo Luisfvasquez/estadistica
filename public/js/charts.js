@@ -2,13 +2,13 @@
 
 let originalChartData = null;
 
-function setupChartPie(canvasId, labels, data) {
+function setupChartPie(canvasId, labels, data, cantname) {
     const ctx = document.getElementById(canvasId)?.getContext('2d');
     if (!ctx) return;
 
     const chart = new Chart(ctx, {
         type: 'doughnut',
-        data: { labels, datasets: [{ data, borderWidth: 1 }] },
+        data: { labels, datasets: [{label: 'Cantidad de ' + cantname, data, borderWidth: 1 }] },
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -46,7 +46,7 @@ function closeModalPie() {
 // charts.js en public/js
 
 
-function setupChartBar(canvasId, labels, data) {
+function setupChartBar(canvasId, labels, data,cantname) {
     const ctx = document.getElementById(canvasId)?.getContext('2d');
     if (!ctx) return;
 
@@ -55,7 +55,7 @@ function setupChartBar(canvasId, labels, data) {
         data: {
             labels,
             datasets: [{
-                label: 'Cantidad de examenes',
+                label: 'Cantidad de ' + cantname, // 🔥 agregamos el nombre de la cantidad
                 data,
                 backgroundColor: generateColors(data.length), // 🔥 agregamos colores
                 borderWidth: 1

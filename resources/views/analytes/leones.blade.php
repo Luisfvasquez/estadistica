@@ -20,15 +20,16 @@
                     class="px-1 py-1">
                     @csrf
                     <p>Fecha inicio</p>
-                    <input datepicker id="default-datepicker" type="date" name="date_start"
+                    <input datepicker id="default-datepicker" type="date" name="date_start" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 h-8 ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date">
                     <p>Fecha fin</p>
-                    <input type="date" name="date_end"
+                    <input type="date" name="date_end" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 h-8 ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date" required>
-                    <input type="file" name="file" accept=".xlsx, .xls, .csv" required>
-                    <button type="submit"
+                    <input type="file" name="file" accept=".xml,application/xml,text/xml" required
+    class="mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+<button type="submit"
                         class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Importar</button>
                 </form>
             </div>
@@ -164,7 +165,7 @@
 
 <script>
     document.addEventListener("livewire:navigated", function() {
-        setupChartBar('myChartBar', @json($examenes->pluck('Descrip')), @json($examenes->pluck('total')));
-        setupChartPie('myChartPie', @json($grupos->pluck('group')), @json($grupos->pluck('total')));
+        setupChartBar('myChartBar', @json($examenes->pluck('Descrip')), @json($examenes->pluck('total')),'examenes');
+        setupChartPie('myChartPie', @json($grupos->pluck('group')), @json($grupos->pluck('total')),'examenes');
     });
 </script>
