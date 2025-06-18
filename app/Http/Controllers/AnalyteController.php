@@ -33,11 +33,10 @@ class AnalyteController extends Controller
             ->get();
 
 
-        $examenes = $query->select('Descrip', DB::raw('COUNT(*) as total'))
+        $examenes = $query->select('Descrip', DB::raw('SUM(totexa) as total'))
             ->groupBy('Descrip')
             ->orderBy('Descrip', 'asc')
             ->get();
-
 
         return compact('resultados', 'grupos', 'examenes', 'total');
     }
@@ -65,66 +64,42 @@ class AnalyteController extends Controller
         
         
         
-        $examenes = $query->select('Descrip', DB::raw('COUNT(*) as total'))
+        $examenes = $query->select('Descrip', DB::raw('SUM(totexa) as total'))
         ->groupBy('Descrip')
         ->orderBy('Descrip', 'asc')
-        ->get();
-        
+        ->get();        
 
-        if ($total == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
         return view('analytes.principal', compact('resultados', 'grupos', 'examenes', 'total'));
     }
 
     public function carali(Request $request)
     {
-        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
-
-        if ($datos['total'] == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
+        
 
         return view('analytes.carali', $this->fetchAnalyteData($request, 'BRICENO CARALI'));
     }
 
     public function leones(Request $request)
     {
-        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
-
-        if ($datos['total'] == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
+        
         return view('analytes.leones', $this->fetchAnalyteData($request, 'BRICENO ESTE'));
     }
 
     public function hospital(Request $request)
     {
-        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
-
-        if ($datos['total'] == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
+        
         return view('analytes.hospital', $this->fetchAnalyteData($request, 'BRICENO Hospital'));
     }
 
     public function salle(Request $request)
     {
-        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
-
-        if ($datos['total'] == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
+       
         return view('analytes.salle', $this->fetchAnalyteData($request, 'BRICENO SALLE'));
     }
 
     public function yaritagua(Request $request)
     {
-        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
-
-        if ($datos['total'] == 0) {
-            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
-        }
+       
         return view('analytes.yaritagua', $this->fetchAnalyteData($request, 'BRICENO YARITAGUA'));
     }
 

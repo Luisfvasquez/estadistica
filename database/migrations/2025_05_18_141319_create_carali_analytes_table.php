@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('special_tests', function (Blueprint $table) {
+        Schema::create('carali_analytes', function (Blueprint $table) {
             $table->id();
-            $table->string('sede');
-            $table->string('textbox12');
             $table->string('group');
-            $table->string('exam');
-            $table->string('amount');
+            $table->string('totexa1');
+            $table->string('idcodigo');
+            $table->string('descrip');
+            $table->string('totexa');
+            $table->string('sede');
+            $table->string('convenio');
+            $table->string('totexa2');
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('special_tests');
+        Schema::dropIfExists('carali_analytes');
     }
 };

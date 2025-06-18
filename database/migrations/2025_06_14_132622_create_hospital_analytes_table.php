@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patiens_totals', function (Blueprint $table) {
-            $table->id();
+        Schema::create('hospital_analytes', function (Blueprint $table) {
+           $table->id();
+            $table->string('group');
+            $table->string('totexa1');
+            $table->string('idcodigo');
+            $table->string('descrip');
+            $table->string('totexa');
             $table->string('sede');
-            $table->string('amount');
+            $table->string('convenio');
+            $table->string('totexa2');
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patiens_totals');
+        Schema::dropIfExists('hospital_analytes');
     }
 };

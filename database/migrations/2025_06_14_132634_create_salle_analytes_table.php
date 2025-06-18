@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('top_fives', function (Blueprint $table) {
-            $table->id();
+        Schema::create('salle_analytes', function (Blueprint $table) {
+           $table->id();
             $table->string('group');
-            $table->string('group1');
-            $table->string('code_exam');
-            $table->string('exam');
-            $table->string('exam_amount');
+            $table->string('totexa1');
+            $table->string('idcodigo');
+            $table->string('descrip');
+            $table->string('totexa');
+            $table->string('sede');
+            $table->string('convenio');
+            $table->string('totexa2');
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('top_fives');
+        Schema::dropIfExists('salle_analytes');
     }
 };

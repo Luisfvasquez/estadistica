@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('salle_incomes', function (Blueprint $table) {
             $table->id();
             $table->string('group');
-            $table->string('textbox9');
-            $table->string('exam_code');
-            $table->string('exam');
-            $table->string('exam_amount');
-            $table->string('total_exam');
+            $table->decimal('cost', 10, 2);
+            $table->string('idcode');
+            $table->string('descrip');
+            $table->decimal('cost1', 10, 2);
             $table->string('sede');
+            $table->string('convenio');
+            $table->decimal('cost2', 10, 2);
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('salle_incomes');
     }
 };

@@ -72,7 +72,10 @@
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Grupo</th>
-                                       <th scope="col"
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Total Exámenes por grupo</th> 
+                                            <th scope="col"
                                                 class="px-6 py-3 text-start text-xs font-medium text-gray-100 uppercase dark:text-neutral-100">
                                                 Total Examenes: {{$total}}</th>
                                     </tr>
@@ -91,7 +94,7 @@
                                             </td>
                                         </tr>
                                         <tr id="details-{{ Str::slug($grupo->group, '_') }}" class="hidden">
-                                            <td colspan="2"
+                                            <td colspan="3"
                                                 class="whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200 dark:bg-neutral-900">
                                                 <table class="min-w-full text-xs text-left">
                                                     <thead>
@@ -129,7 +132,11 @@
             </div>
 
         </div>
-    </div>
+    </div>  @if ($resultados->isEmpty())
+        <div class="flex items-center justify-center h-64">
+            <p class="text-gray-500 dark:text-neutral-400">No hay resultados para mostrar.</p>
+        </div>        
+    @endif
     <!-- Modal para gráfico -->
     <div id="chartModalPie" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden ">
         <div

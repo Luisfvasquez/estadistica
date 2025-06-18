@@ -74,7 +74,7 @@
                                             Grupo</th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Total Exámenes</th> 
+                                            Total Exámenes por grupo</th> 
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-xs font-medium text-gray-100 uppercase dark:text-neutral-100">
                                                 Total Examenes: {{$total}}</th>
@@ -132,7 +132,11 @@
             </div>
 
         </div>
-    </div>
+    </div>  @if ($resultados->isEmpty())
+        <div class="flex items-center justify-center h-64">
+            <p class="text-gray-500 dark:text-neutral-400">No hay resultados para mostrar.</p>
+        </div>        
+    @endif
     <!-- Modal para gráfico -->
     <div id="chartModalPie" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden ">
         <div

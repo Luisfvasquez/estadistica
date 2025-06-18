@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buys', function (Blueprint $table) {
+        Schema::create('carali_incomes', function (Blueprint $table) {
             $table->id();
-            $table->string('section');
-            $table->string('exam1');
-            $table->string('codigo');
-            $table->date('fecha');
+            $table->string('group');
+            $table->decimal('cost', 10, 2);
+            $table->string('idcode');
+            $table->string('descrip');
+            $table->decimal('cost1', 10, 2);
             $table->string('sede');
+            $table->string('convenio');
+            $table->decimal('cost2', 10, 2);
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buys');
+        Schema::dropIfExists('carali_incomes');
     }
 };

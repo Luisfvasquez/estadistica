@@ -32,11 +32,12 @@ function showChartModalPie() {
     if (!canvas || !originalChartDataPie) return;
 
     Chart.getChart(canvas)?.destroy();
+
     originalChartDataPie.options.plugins = {
         datalabels: {
             formatter: (value, ctx) => {
                 const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                const percentage = (value / sum * 100).toFixed(1) + '%';
+                const percentage = (value / sum * 100).toFixed(2) + '%';
                 return percentage;
             },
             color: '#000',

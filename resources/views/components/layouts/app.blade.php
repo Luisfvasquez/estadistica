@@ -1,7 +1,8 @@
 <x-layouts.app.sidebar :title="$title ?? null">
     <flux:main>
         {{ $slot }}        
-<script src="{{ asset('js/charts.js') }}"></script>  
+<script src="{{ asset('js/income.js') }}"></script>  
+<script src="{{ asset('js/analyte.js') }}"></script>  
 
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>

@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('analyte/yaritagua', [AnalyteController::class, 'yaritagua'])->name('analyte.yaritagua');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
+    
+    Route::get('analyte/principal', [AnalyteController::class, 'principal'])->name('analyte.principal');
     Route::get('facture/carali', [IncomeController::class, 'carali'])->name('facture.carali');
     Route::get('facture/leones', [IncomeController::class, 'leones'])->name('facture.leones');
     Route::get('facture/hospital', [IncomeController::class, 'hospital'])->name('facture.hospital');
@@ -35,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('facture/yaritagua', [IncomeController::class, 'yaritagua'])->name('facture.yaritagua');
 
     Route::post('analyte/import', [AnalyteController::class, 'store'])->name('analyte.import');
+    Route::post('facture/imports', [IncomeController::class, 'stores'])->name('facture.imports');
     Route::post('facture/import', [IncomeController::class, 'store'])->name('facture.import');
 });
 

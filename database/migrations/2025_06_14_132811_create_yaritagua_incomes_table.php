@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exonerateds', function (Blueprint $table) {
+       Schema::create('yaritagua_incomes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('phone_number');
-            $table->string('mail');
-            $table->string('idconvenio');
+            $table->string('group');
+            $table->decimal('cost', 10, 2);
+            $table->string('idcode');
             $table->string('descrip');
-            $table->date('date');
+            $table->decimal('cost1', 10, 2);
             $table->string('sede');
+            $table->string('convenio');
+            $table->decimal('cost2', 10, 2);
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exonerateds');
+        Schema::dropIfExists('yaritagua_incomes');
     }
 };
