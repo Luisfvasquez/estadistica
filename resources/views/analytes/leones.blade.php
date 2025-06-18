@@ -71,9 +71,9 @@
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Grupo</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Total Exámenes</th>
+                                      <th scope="col"
+                                                class="px-6 py-3 text-start text-xs font-medium text-gray-100 uppercase dark:text-neutral-100">
+                                                Total Examenes: {{$total}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

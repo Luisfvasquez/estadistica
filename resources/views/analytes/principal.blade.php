@@ -1,4 +1,4 @@
-<x-layouts.app :title="__('Analitos Yaritagua')">
+<x-layouts.app :title="__('Analitos todas las sedes')">
 
     <div class="flex w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -37,7 +37,7 @@
         </div>
         <div class="relative flex-1 p-1 overflow-hidden rounded-xl border border-neutral-900 dark:border-neutral-700">
             <p class="mb-2">Filtrar por fecha:</p>
-            <form action="{{ route('analyte.yaritagua') }}" method="get" class="px-1 py-1">
+            <form action="{{ route('analyte.carali') }}" method="get" class="px-1 py-1">
                 @csrf
                 <div class="flex items-end gap-x-2 flex-wrap sm:flex-nowrap">
                     <div>
@@ -72,7 +72,10 @@
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Grupo</th>
-                                       <th scope="col"
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Total Exámenes</th> 
+                                            <th scope="col"
                                                 class="px-6 py-3 text-start text-xs font-medium text-gray-100 uppercase dark:text-neutral-100">
                                                 Total Examenes: {{$total}}</th>
                                     </tr>
@@ -91,7 +94,7 @@
                                             </td>
                                         </tr>
                                         <tr id="details-{{ Str::slug($grupo->group, '_') }}" class="hidden">
-                                            <td colspan="2"
+                                            <td colspan="3"
                                                 class="whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200 dark:bg-neutral-900">
                                                 <table class="min-w-full text-xs text-left">
                                                     <thead>

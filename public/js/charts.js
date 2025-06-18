@@ -32,12 +32,29 @@ function showChartModalPie() {
     if (!canvas || !originalChartDataPie) return;
 
     Chart.getChart(canvas)?.destroy();
+    originalChartDataPie.options.plugins = {
+        datalabels: {
+            formatter: (value, ctx) => {
+                const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                const percentage = (value / sum * 100).toFixed(1) + '%';
+                return percentage;
+            },
+            color: '#000',
+            font: {
+                weight: 'bold'
+            }
+        },
+        legend: {
+            position: 'bottom'
+        }
+    };
 
     const ctx = canvas.getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
         data: originalChartDataPie.data,
-        options: originalChartDataPie.options
+        options: originalChartDataPie.options,        
+        plugins: [ChartDataLabels],
     });
 }
 function closeModalPie() {
@@ -61,7 +78,6 @@ function setupChartBar(canvasId, labels, data,cantname) {
                 borderWidth: 1
             }]
         },
-
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -97,6 +113,7 @@ function showChartModalBar() {
 function closeModalBar() {
     document.getElementById('chartModalBar')?.classList.add('hidden');
 }
+
 function generateColors(count) {
     const colors = [
         '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',

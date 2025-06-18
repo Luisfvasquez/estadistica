@@ -12,19 +12,19 @@ use PhpParser\Node\Expr\Cast\Double;
 
 class IncomeController extends Controller
 {
-     private function fetchAnalyteData(Request $request, string $sede)
+    private function fetchAnalyteData(Request $request, string $sede)
     {
         $query = Income::where('sede', $sede);
-        
+
         if ($request->filled('date_start')) {
             $query->where('date_start', '>=', $request->date_start);
         }
-        
+
         if ($request->filled('date_end')) {
             $query->where('date_end', '<=', $request->date_end);
         }
 
-        $total = $query->sum('cost1');       
+        $total = $query->sum('cost1');
         $resultados = $query->get();
 
         $grupos = $query->select('group', DB::raw('SUM(cost1) as total'))
@@ -38,31 +38,56 @@ class IncomeController extends Controller
             ->get();
 
 
-        return compact('resultados', 'grupos', 'examenes','total');
+        return compact('resultados', 'grupos', 'examenes', 'total');
     }
 
     public function carali(Request $request)
-    {   
+    {
+        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
+
+        if ($datos['total'] == 0) {
+            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
+        }
         return view('income.carali', $this->fetchAnalyteData($request, 'BRICENO CARALI'));
     }
 
     public function leones(Request $request)
     {
+        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
+
+        if ($datos['total'] == 0) {
+            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
+        }
         return view('income.leones', $this->fetchAnalyteData($request, 'BRICENO ESTE'));
     }
 
     public function hospital(Request $request)
     {
+        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
+
+        if ($datos['total'] == 0) {
+            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
+        }
         return view('income.hospital', $this->fetchAnalyteData($request, 'BRICENO Hospital'));
     }
 
     public function salle(Request $request)
     {
+        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
+
+        if ($datos['total'] == 0) {
+            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
+        }
         return view('income.salle', $this->fetchAnalyteData($request, 'BRICENO SALLE'));
     }
 
     public function yaritagua(Request $request)
     {
+        $datos = $this->fetchAnalyteData($request, 'BRICENO CARALI');
+
+        if ($datos['total'] == 0) {
+            return redirect()->back()->with('error', 'No se encontraron datos selecciona una fecha valida.');
+        }
         return view('income.yaritagua', $this->fetchAnalyteData($request, 'BRICENO YARITAGUA'));
     }
 
@@ -71,15 +96,15 @@ class IncomeController extends Controller
     {
         $file = $request->file('file');
 
-            $request->validate([
+        $request->validate([
             'file' => 'required|file|mimes:xml|max:2048', // Validar que sea un archivo XML
             'date_start' => 'required|date',
             'date_end' => 'required|date|after_or_equal:date_start',
         ]);
 
         try {
-        $xmlString = file_get_contents($file->getRealPath());
-        $xmlString = mb_convert_encoding($xmlString, 'UTF-8', 'auto');
+            $xmlString = file_get_contents($file->getRealPath());
+            $xmlString = mb_convert_encoding($xmlString, 'UTF-8', 'auto');
 
 
             $xml = simplexml_load_string(
@@ -87,14 +112,14 @@ class IncomeController extends Controller
                 'SimpleXMLElement',
                 LIBXML_NOCDATA | LIBXML_NOERROR | LIBXML_NOWARNING
             );
-            
+
             if ($xml === false) {
                 return redirect()->back()->with('error', 'No se pudo leer el XML.');
             }
-            
+
             $json = json_encode($xml);
             $data = json_decode($json, true);
-            
+
 
 
             $costo2 = $data['table1']['@attributes']['costo2'] ?? null;
@@ -115,13 +140,13 @@ class IncomeController extends Controller
 
                     Income::create([
                         'group'     => $grupoName,
-                        'cost'   => (double) str_replace(',', '.', $costo1),
+                        'cost'   => (float) str_replace(',', '.', $costo1),
                         'idcode'  => $attr['idCodigo'],
                         'descrip'   => $attr['Descrip'],
-                        'cost1'    => (double) str_replace(',', '.', $attr['costo1']),
+                        'cost1'    => (float) str_replace(',', '.', $attr['costo1']),
                         'sede'      => $attr['SEDE'],
                         'convenio'  => $attr['CONVENIO'],
-                        'cost2'   => (double) str_replace(',', '.', $costo2),
+                        'cost2'   => (float) str_replace(',', '.', $costo2),
                         'date_start' => $request->input('date_start'),
                         'date_end'  => $request->input('date_end'),
                     ]);
@@ -133,6 +158,4 @@ class IncomeController extends Controller
             return redirect()->back()->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
         }
     }
-
-
 }

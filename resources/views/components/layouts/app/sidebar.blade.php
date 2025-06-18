@@ -23,6 +23,9 @@
             </flux:navlist.item>
             
             <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.principal')" :current="request()->routeIs('analyte.principal')" wire:navigate>
+                    {{ __('Analitos todas las sedes') }}
+                </flux:navlist.item>
                 <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
                     {{ __('Carali Analitos') }}
                 </flux:navlist.item>

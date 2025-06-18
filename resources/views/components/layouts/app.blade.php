@@ -3,6 +3,7 @@
         {{ $slot }}        
 <script src="{{ asset('js/charts.js') }}"></script>  
 
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>
     @if (session('success'))
         Swal.fire({

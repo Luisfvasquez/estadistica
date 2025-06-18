@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
+    Route::get('analyte/principal', [AnalyteController::class, 'principal'])->name('analyte.principal');
     Route::get('analyte/carali', [AnalyteController::class, 'carali'])->name('analyte.carali');
     Route::get('analyte/leones', [AnalyteController::class, 'leones'])->name('analyte.leones');
     Route::get('analyte/hospital', [AnalyteController::class, 'hospital'])->name('analyte.hospital');
