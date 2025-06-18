@@ -18,7 +18,7 @@
                 class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                 <form action="{{ route('analyte.import') }}" method="post" enctype="multipart/form-data"
                     class="px-1 py-1">
-                    @csrf
+                    @csrf                    
                     <label for="date_start" class="text-sm">Fecha inicio</label>
                     <input id="date_start" type="date" name="date_start" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -38,7 +38,7 @@
         <div class="relative flex-1 p-1 overflow-hidden rounded-xl border border-neutral-900 dark:border-neutral-700">
             <p class="mb-2">Filtrar por fecha:</p>
             <form action="{{ route('analyte.carali') }}" method="get" class="px-1 py-1">
-                @csrf
+                @csrf                
                 <div class="flex items-end gap-x-2 flex-wrap sm:flex-nowrap">
                     <div>
                         <label for="date_start" class="text-sm">Fecha inicio</label>

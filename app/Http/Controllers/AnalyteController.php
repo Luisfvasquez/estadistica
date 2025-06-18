@@ -73,9 +73,8 @@ class AnalyteController extends Controller
     }
 
     public function carali(Request $request)
-    {
+    {   
         
-
         return view('analytes.carali', $this->fetchAnalyteData($request, 'BRICENO CARALI'));
     }
 
