@@ -2,36 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\AggregatesIncomes;
 use App\Models\IncomeLeones;
+use App\QueryFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EsteIncome extends Controller
 {
+    use QueryFilters,AggregatesIncomes;
      private function fetchAnalyteData(Request $request)
     {
        $query= IncomeLeones::query();
 
-        if ($request->filled('date_start')) {
-            $query->where('date_start', '>=', $request->date_start);
-        }
-
-        if ($request->filled('date_end')) {
-            $query->where('date_end', '<=', $request->date_end);
-        }
-
+        
+        $query = $this->applyDateFilters($query, $request);
+        
         $total = $query->sum('cost1');
         $resultados = $query->get();
 
-        $grupos = $query->select('group', DB::raw('SUM(cost1) as total'))
-            ->groupBy('group')
-            ->orderBy('group', 'asc')
-            ->get();
+        
+        $grupos = $this->getGroupedCostTotals($query);
 
-        $examenes = $query->select('Descrip', DB::raw('SUM(cost1) as total'))
-            ->groupBy('Descrip')
-            ->orderBy('Descrip', 'asc')
-            ->get();
+        $examenes = $this->getExamCostTotals($query);
 
 
         return compact('resultados', 'grupos', 'examenes', 'total');

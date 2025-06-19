@@ -67,17 +67,17 @@
                                 <tbody>
                                     @foreach ($grupos as $grupo)
                                         <tr class="cursor-pointer"
-                                            onclick="toggleDetails('{{ Str::slug($grupo->group, '_') }}')">
+                                            onclick="toggleDetails('{{ Str::slug($grupo['group'],'_') }}')">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200">
-                                                {{ $grupo->group }}
+                                                {{ $grupo['group'] }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-200 dark:text-neutral-200">
-                                                {{ $grupo->total }}
+                                                {{ $grupo['total'] }}
                                             </td>
                                         </tr>
-                                        <tr id="details-{{ Str::slug($grupo->group, '_') }}" class="hidden">
+                                        <tr id="details-{{ Str::slug($grupo['group'], '_') }}" class="hidden">
                                             <td colspan="3"
                                                 class="whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200 dark:bg-neutral-900">
                                                 <table class="min-w-full text-xs text-left">
@@ -92,7 +92,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="text-gray-100 ">
-                                                        @foreach ($resultados->where('group', $grupo->group) as $detalle)
+                                                        @foreach ($resultados->where('group', $grupo['group']) as $detalle)
                                                             <tr
                                                                 class="border-t border-neutral-700 dark:border-neutral-100 ">
                                                                 <td class="px-6 py-2 "></td>

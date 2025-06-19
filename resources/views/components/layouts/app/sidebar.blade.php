@@ -49,6 +49,9 @@
             </flux:navlist.item>
             
             <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('facture.principal')" :current="request()->routeIs('facture.principal')" wire:navigate>
+                    {{ __('Ingresos todas las sedes') }}
+                </flux:navlist.item>
                 <flux:navlist.item :href="route('facture.carali')" :current="request()->routeIs('facture.carali')" wire:navigate>
                     {{ __('Carali Ingresos') }}
                 </flux:navlist.item>

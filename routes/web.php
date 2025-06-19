@@ -7,6 +7,7 @@ use App\Http\Controllers\EsteAnalyte;
 use App\Http\Controllers\EsteIncome;
 use App\Http\Controllers\HospitalAnalyte;
 use App\Http\Controllers\HospitalIncome;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SalleAnalyte;
 use App\Http\Controllers\SalleIncome;
 use App\Http\Controllers\YaritaguaAnalyte;
@@ -38,7 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('analyte/hospital', [HospitalAnalyte::class, 'hospital'])->name('analyte.hospital');
     Route::get('analyte/salle', [SalleAnalyte::class, 'salle'])->name('analyte.salle');
     Route::get('analyte/yaritagua', [YaritaguaAnalyte::class, 'yaritagua'])->name('analyte.yaritagua'); 
-   
+    
+
+    Route::get('facture/principal', [IncomeController::class, 'principal'])->name('facture.principal');
 
     Route::get('facture/carali', [CaraliIncome::class, 'carali'])->name('facture.carali');
     Route::get('facture/este', [EsteIncome::class, 'este'])->name('facture.este');

@@ -2,38 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\AggregatesAnalytes;
 use App\Models\AnalyteSalle;
+use App\QueryFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SalleAnalyte extends Controller
 {
-     private function fetchAnalyteData(Request $request)
+    use QueryFilters, AggregatesAnalytes;
+
+    private function fetchAnalyteData(Request $request)
     {
         $query = AnalyteSalle::query();
 
-
-        if ($request->filled('date_start')) {
-            $query->where('date_start', '>=', $request->date_start);
-        }
-
-        if ($request->filled('date_end')) {
-            $query->where('date_end', '<=', $request->date_end);
-        }
+        $query = $this->applyDateFilters($query, $request);
 
         $resultados = $query->get();
         $total = $query->sum('totexa');
 
-        $grupos = $query->select('group', DB::raw('SUM(totexa) as total'))
-            ->groupBy('group', 'group')
-            ->orderBy('group', 'asc')
-            ->get();
+        
+        $grupos = $this->getGroupedTotals($query);
 
-
-        $examenes = $query->select('Descrip', DB::raw('SUM(totexa) as total'))
-            ->groupBy('Descrip')
-            ->orderBy('Descrip', 'asc')
-            ->get();
+        $examenes = $this->getExamTotals($query);
 
         return compact('resultados', 'grupos', 'examenes', 'total');
     }

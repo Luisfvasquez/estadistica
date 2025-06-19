@@ -16,26 +16,12 @@
             </div>
             <div
                 class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <form action="{{ route('facture.carali.import') }}" method="post" enctype="multipart/form-data"
-                    class="px-1 py-1">
-                    @csrf
-                    <label for="date_start" class="text-sm">Fecha inicio</label>
-                    <input id="date_start" type="date" name="date_start" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <label for="date_end" class="text-sm">Fecha fin</label>
-                    <input id="date_end" type="date" name="date_end" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-40 h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <input type="file" name="file" accept=".xml,application/xml,text/xml" required
-                        class="mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <button type="submit"
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Importar</button>
-                </form>
-
+                
             </div>
         </div>
         <div class="relative flex-1 p-1 overflow-hidden rounded-xl border border-neutral-900 dark:border-neutral-700">
             <p class="mb-2">Filtrar por fecha:</p>
-            <form action="{{ route('facture.carali') }}" method="get" class="px-1 py-1">
+            <form action="{{ route('facture.principal') }}" method="get" class="px-1 py-1">
                 @csrf
                 <div class="flex items-end gap-x-2 flex-wrap sm:flex-nowrap">
                     <div>
@@ -79,17 +65,17 @@
                                 <tbody>
                                     @foreach ($grupos as $grupo)
                                         <tr class="cursor-pointer"
-                                            onclick="toggleDetails('{{ Str::slug($grupo->group, '_') }}')">
+                                            onclick="toggleDetails('{{ Str::slug($grupo['group'], '_') }}')">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200">
-                                                {{ $grupo->group }}
+                                                {{ $grupo['group'] }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-200 dark:text-neutral-200">
-                                                {{ number_format($grupo->total, 2, '.', '') }}
+                                                {{ number_format($grupo['total'], 2, '.', '') }}
                                             </td>
                                         </tr>
-                                        <tr id="details-{{ Str::slug($grupo->group, '_') }}" class="hidden">
+                                        <tr id="details-{{ Str::slug($grupo['group'], '_') }}" class="hidden">
                                             <td colspan="3"
                                                 class="whitespace-nowrap text-sm font-medium text-gray-200 dark:text-neutral-200 dark:bg-neutral-900">
                                                 <table class="min-w-full text-xs text-left">
@@ -104,7 +90,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="text-gray-100 ">
-                                                        @foreach ($resultados->where('group', $grupo->group) as $detalle)
+                                                        @foreach ($resultados->where('group', $grupo['group']) as $detalle)
                                                             <tr
                                                                 class="border-t border-neutral-700 dark:border-neutral-100 ">
                                                                 <td class="px-6 py-2 "></td>
