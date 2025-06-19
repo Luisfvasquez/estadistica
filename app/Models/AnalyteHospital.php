@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnalyteHospital extends Model
 {
+    protected $table = 'hospital_analytes';
     protected $fillable = [
         'group',
         'totexa1',

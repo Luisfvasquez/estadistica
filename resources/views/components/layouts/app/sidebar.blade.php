@@ -29,8 +29,8 @@
                 <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
                     {{ __('Carali Analitos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('analyte.leones')" :current="request()->routeIs('analyte.leones')" wire:navigate>
-                    {{ __('Leones Analitos') }}
+                <flux:navlist.item :href="route('analyte.este')" :current="request()->routeIs('analyte.este')" wire:navigate>
+                    {{ __('Este Analitos') }}
                 </flux:navlist.item>
                 <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
                     {{ __('Hospital Analitos') }}
@@ -52,8 +52,8 @@
                 <flux:navlist.item :href="route('facture.carali')" :current="request()->routeIs('facture.carali')" wire:navigate>
                     {{ __('Carali Ingresos') }}
                 </flux:navlist.item>
-                <flux:navlist.item :href="route('facture.leones')" :current="request()->routeIs('facture.leones')" wire:navigate>
-                    {{ __('Leones Ingresos') }}
+                <flux:navlist.item :href="route('facture.este')" :current="request()->routeIs('facture.Este')" wire:navigate>
+                    {{ __('Este Ingresos') }}
                 </flux:navlist.item>
                 <flux:navlist.item :href="route('facture.hospital')" :current="request()->routeIs('facture.hospital')" wire:navigate>
                     {{ __('Hospital Ingresos') }}

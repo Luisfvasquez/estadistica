@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IncomeCarali extends Model
 {
+    protected $table = 'carali_incomes';
     protected $fillable = [
         'group',
         'cost',

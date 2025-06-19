@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnalyteCarali extends Model
 {
+    protected $table = 'carali_analytes';
     protected $fillable = [
         'group',
         'totexa1',

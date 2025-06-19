@@ -16,7 +16,7 @@
             </div>
             <div
                 class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <form action="{{ route('facture.imports') }}" method="post" enctype="multipart/form-data"
+                <form action="{{ route('facture.salle.imports') }}" method="post" enctype="multipart/form-data"
                     class="px-1 py-1">
                     @csrf
                     <label for="date_start" class="text-sm">Fecha inicio</label>

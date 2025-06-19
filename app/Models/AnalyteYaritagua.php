@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnalyteYaritagua extends Model
 {
+    protected $table = 'yaritagua_analytes';
+
+    
    protected $fillable = [
         'group',
         'totexa1',
