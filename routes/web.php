@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('facture/yaritagua', [YaritaguaIncome::class, 'yaritagua'])->name('facture.yaritagua');
 
     Route::post('analyte/carali/import', [CaraliAnalyte::class, 'store'])->name('analyte.carali.import');
-    Route::post('analyte/salle/import', [CaraliAnalyte::class, 'store'])->name('analyte.salle.import');
+    Route::post('analyte/salle/import', [SalleAnalyte::class, 'store'])->name('analyte.salle.import');
     Route::post('analyte/hospital/import', [HospitalAnalyte::class, 'store'])->name('analyte.hospital.import');
     Route::post('analyte/yaritagua/import', [YaritaguaAnalyte::class, 'store'])->name('analyte.yaritagua.import');
     Route::post('analyte/este/import', [EsteAnalyte::class, 'store'])->name('analyte.este.import');
