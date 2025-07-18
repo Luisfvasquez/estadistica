@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\AggregatesIncomes;
 use App\Models\IncomeLeones;
 use App\QueryFilters;
+use App\XmlTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EsteIncome extends Controller
 {
-    use QueryFilters,AggregatesIncomes;
+    use QueryFilters,AggregatesIncomes, XmlTrait;
      private function fetchAnalyteData(Request $request)
     {
        $query= IncomeLeones::query();
@@ -45,55 +45,9 @@ class EsteIncome extends Controller
         ]);
 
         try {
-            $xmlString = file_get_contents($file->getRealPath());
-            $xmlString = mb_convert_encoding($xmlString, 'UTF-8', 'auto');
+            $modelName = IncomeLeones::class;
 
-
-            $xml = simplexml_load_string(
-                $xmlString,
-                'SimpleXMLElement',
-                LIBXML_NOCDATA | LIBXML_NOERROR | LIBXML_NOWARNING
-            );
-
-            if ($xml === false) {
-                return redirect()->back()->with('error', 'No se pudo leer el XML.');
-            }
-
-            $json = json_encode($xml);
-            $data = json_decode($json, true);
-
-
-
-            $costo2 = $data['table1']['@attributes']['costo2'] ?? null;
-            $grupos = $data['table1']['table1_GRUPO_Collection']['table1_GRUPO'] ?? [];
-
-            foreach ($grupos as $grupo) {
-                $grupoName = isset($grupo['@attributes']['GRUPO']) ? $grupo['@attributes']['GRUPO'] : null;
-                $costo1 = $grupo['@attributes']['costo'] ?? null;
-
-                $detalles = $grupo['Detail_Collection']['Detail'] ?? [];
-
-                if (isset($detalles['@attributes'])) {
-                    $detalles = [$detalles];
-                }
-
-                foreach ($detalles as $detalle) {
-                    $attr = $detalle['@attributes'] ?? [];
-
-                    IncomeLeones::create([
-                        'group'     => $grupoName,
-                        'cost'   => (float) str_replace(',', '.', $costo1),
-                        'idcode'  => $attr['idCodigo'],
-                        'descrip'   => $attr['Descrip'],
-                        'cost1'    => (float) str_replace(',', '.', $attr['Costo1']),
-                        'sede'      => $attr['SEDE'],
-                        'convenio'  => $attr['CONVENIO'],
-                        'cost2'   => (float) str_replace(',', '.', $costo2),
-                        'date_start' => $request->input('date_start'),
-                        'date_end'  => $request->input('date_end'),
-                    ]);
-                }
-            }
+            $this->XmlFileIncome($file, $modelName, $request);
 
             return redirect()->back()->with('success', 'Datos importados correctamente.');
         } catch (\Exception $e) {
