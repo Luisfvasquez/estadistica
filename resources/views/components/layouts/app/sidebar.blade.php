@@ -12,24 +12,73 @@
             </a>           
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Items')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="home" :href="route('grafico')" :current="request()->routeIs('grafico')" wire:navigate>{{ __('Grafico') }}</flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
+    <flux:navlist.group :heading="__('Items')" class="grid">
+        <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+            {{ __('Dashboard') }}
+        </flux:navlist.item>
+        <!-- Menú desplegable con Alpine.js -->
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="analytes" @click="open = !open" class="cursor-pointer">
+                {{ __('Analitos') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('analyte.principal')" :current="request()->routeIs('analyte.principal')" wire:navigate>
+                    {{ __('Analitos todas las sedes') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.carali')" :current="request()->routeIs('analyte.carali')" wire:navigate>
+                    {{ __('Carali Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.este')" :current="request()->routeIs('analyte.este')" wire:navigate>
+                    {{ __('Este Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.hospital')" :current="request()->routeIs('analyte.hospital')" wire:navigate>
+                    {{ __('Hospital Analitos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('analyte.salle')" :current="request()->routeIs('analyte.salle')" wire:navigate>
+                    {{ __('Salle Analitos') }}
+                </flux:navlist.item>
+                 <flux:navlist.item :href="route('analyte.yaritagua')" :current="request()->routeIs('analyte.yaritagua')" wire:navigate>
+                    {{ __('Yaritagua Analitos') }}
+                </flux:navlist.item> 
+            </div>
+        </div>  
+        <div x-data="{ open: false }">
+            <flux:navlist.item icon="users" @click="open = !open" class="cursor-pointer">
+                {{ __('Ingresos') }}
+            </flux:navlist.item>
+            
+            <div x-show="open" class="pl-4">
+                <flux:navlist.item :href="route('facture.principal')" :current="request()->routeIs('facture.principal')" wire:navigate>
+                    {{ __('Ingresos todas las sedes') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('facture.carali')" :current="request()->routeIs('facture.carali')" wire:navigate>
+                    {{ __('Carali Ingresos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('facture.este')" :current="request()->routeIs('facture.este')" wire:navigate>
+                    {{ __('Este Ingresos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('facture.hospital')" :current="request()->routeIs('facture.hospital')" wire:navigate>
+                    {{ __('Hospital Ingresos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('facture.salle')" :current="request()->routeIs('facture.salle')" wire:navigate>
+                    {{ __('Salle Ingresos') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('facture.yaritagua')" :current="request()->routeIs('facture.yaritagua')" wire:navigate>
+                    {{ __('Yaritagua Ingresos') }}
+                </flux:navlist.item>
+            </div>
+        </div>  
+       
+
+    </flux:navlist.group>                
+</flux:navlist>
+
+
+            
+
 
             <flux:spacer />
-
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="#" target="_blank">
-                {{ __('option 1') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="#" target="_blank">
-                {{ __('option 2') }}
-                </flux:navlist.item>
-            </flux:navlist>
-
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
                 <flux:profile
